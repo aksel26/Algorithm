@@ -1,17 +1,35 @@
 const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "input.txt";
-const [N, INPUT] = fs.readFileSync(filePath).toString().trim().split("\n");
-let numbers = INPUT.split(" ").map(Number);
+const [N, input] = fs
+  .readFileSync(filePath)
+  .toString()
+  .trim()
+  .split("\n")
+  .map((item) => item.split(" ").map((item) => +item));
+// let origin = [...input];
+// let set = new Set(input.sort((a, b) => b - a));
+// let setArray = [...set];
+// let answer = [];
 
-let arr = Array.from({ length: N }, () => 0);
-let numbersCopy = [...numbers];
-let set = new Set();
-for (let i = 0; i < numbers.length; i++) {
-  let tempNum = numbers[i];
+// for (let i = 0; i < origin.length; i++) {
+//   let target = origin[i];
+//   const arrLength = setArray.length;
+//   answer.push(arrLength - (setArray.indexOf(target) + 1));
+// }
+// console.log(answer.join(" "));
 
-  numbersCopy.sort((a, b) => b - a).forEach((item) => set.add(item));
-  const temp = [...set];
+// let N = Number(input.shift());
 
-  arr[i] = temp.slice(temp.indexOf(tempNum) + 1).length;
+let set = new Set(input);
+let uniq = [...set].sort((a, b) => a - b);
+
+let dic = {};
+uniq.forEach((e, index) => {
+  dic[e] = index;
+});
+let answer = "";
+for (let i = 0; i < input.length; i++) {
+  answer += dic[input[i]] + " ";
 }
-console.log(arr.join(" "));
+
+console.log(answer);
