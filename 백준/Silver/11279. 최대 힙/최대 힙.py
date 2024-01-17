@@ -1,17 +1,8 @@
 import sys
-import heapq as hq
-
-T = int(sys.stdin.readline())
-
-heap= []
-for i in range(T):
-    num = int(sys.stdin.readline())
-    if num:
-        hq.heappush(heap, (-num, num))
-    else:
-        if len(heap) >= 1:
-            print(hq.heappop(heap)[1])
-        else:
-            print(0)
-
-
+from heapq import heappush, heappop
+heap = []
+[
+    heappush(heap, -i) if i
+    else print(-heappop(heap) if heap else 0)
+    for i in map(int, sys.stdin.read().split()[1:])
+]
