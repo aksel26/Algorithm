@@ -1,3 +1,2 @@
 def solution(arr, delete_list):
-    [arr.remove(x) if x in arr else x for x in delete_list]
-    return arr
+    return [i for i in arr if i not in delete_list]
