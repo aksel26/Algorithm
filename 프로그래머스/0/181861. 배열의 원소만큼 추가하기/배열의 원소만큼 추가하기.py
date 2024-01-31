@@ -1,8 +1,7 @@
 def solution(arr):
     answer = []
     
-    for x in arr:
-        answer = answer + [x for i in range(x)]
     
-    return answer
+    [answer.append(str(x) * x) for x in arr ]
+    return list(map(int, list(''.join(answer))))
 
