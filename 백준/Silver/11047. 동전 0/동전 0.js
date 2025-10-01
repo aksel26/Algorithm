@@ -4,7 +4,7 @@ const input = require("fs")
   .trim()
   .split("\n");
 
-let [N, K] = input[0].split(" ");
+let K = Number(input[0].split(" ")[1]);
 const coins = input
   .slice(1)
   .map(Number)
@@ -12,12 +12,13 @@ const coins = input
 
 let count = 0;
 
-coins.forEach((coin) => {
-  if (Math.floor(K / coin) !== 0) {
-    let t = Math.floor(K / coin);
-    K = K - t * coin;
-    count += t;
+for (const coin of coins) {
+  if (K >= coin) {
+    const coinCount = Math.floor(K / coin);
+    K -= coinCount * coin;
+    count += coinCount;
   }
-});
+  if (K === 0) break;
+}
 
 console.log(count);
