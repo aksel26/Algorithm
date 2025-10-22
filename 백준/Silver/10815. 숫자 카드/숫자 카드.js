@@ -4,17 +4,18 @@ const input = require("fs")
   .trim()
   .split("\n");
 
-const cardSet = new Set();
+const CARDS = input[1].split(" ").map(Number);
+const TARGET_N = parseInt(input[2]);
+const TARGET_CARDS = input[3].split(" ").map(Number);
 
-input[1].split(" ").map((card) => cardSet.add(Number(card)));
+const cardsMap = new Set();
 
-let result = [];
+CARDS.forEach((card) => cardsMap.add(card));
 
-const target = input[3].split(" ").map(Number);
+let result = new Array(TARGET_N).fill(0);
 
-for (const element of target) {
-  if (cardSet.has(element)) result.push(1);
-  else result.push(0);
+for (let i = 0; i < TARGET_CARDS.length; i++) {
+  if (cardsMap.has(TARGET_CARDS[i])) result[i] = 1;
 }
 
 console.log(result.join(" "));
