@@ -1,25 +1,25 @@
-const input = require("fs")
+let [N, M] = require("fs")
   .readFileSync(process.platform === "linux" ? "/dev/stdin" : "./input.txt")
   .toString()
   .trim()
-  .split(" ");
+  .split(" ")
+  .map(Number);
 
-const [totalLength, targetOrder] = input.map(Number);
+const numbers = Array.from({ length: N }, (_, index) => index + 1);
 
-let arr = Array.from({ length: totalLength }, (_, index) => index + 1);
+let count = M - 1;
+let result = [];
 
-let answer = [];
+while (numbers.length > 0) {
+  const front = numbers.shift();
 
-while (arr.length) {
-  for (let i = 1; i <= targetOrder; i++) {
-    const current = arr.shift();
-
-    if (i === targetOrder) {
-      answer.push(current);
-    } else {
-      arr.push(current);
-    }
+  if (count === 0) {
+    result.push(front);
+    count = M - 1;
+  } else {
+    numbers.push(front);
+    count--;
   }
 }
 
-console.log(`<${answer.join(", ")}>`);
+console.log(`<${result.join(", ")}>`);
